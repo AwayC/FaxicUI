@@ -9,27 +9,38 @@ namespace Faxic {
 Drawer::Drawer(halDisplay* display) {
 	width = display->getWidth();
 	height = display->getHeight();
-	RGB_t color = display->getColor();
 	alpha = display->getAlpha();
-	buffer.resize(width * height);
+	setAlpha(alpha);
+	buffer.resize(width, height); // 初始化缓冲区
+	this->display = display;
 }
 
 void Drawer::setColor(RGB_t color) {
-    this->drawColor = color; // set color
+    display->setColor(color);
 }
 void Drawer::setAlpha(uint8_t a) {
     this->alpha = a;
+    display->setA(a);
 }
 
 void Drawer::flush() {
     // flush the buffer
 	for(int x = 0;x < width;x ++) {
 		for(int y = 0;y < height;y ++) {
-			display->setColor(buffer[x + y * width]);
+			display->setColor(buffer.at(x, y));
 			display->drawPixel(x, y);
 		}
 	}
 	display->showCanvas();
+}
+
+void Drawer::clear() {
+    // clear the buffer
+	buffer.clear();
+}
+
+void Drawer::drawComponent(drawBase* component) {
+	component->draw(buffer);
 }
 
 }

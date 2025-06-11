@@ -5,17 +5,10 @@
 #ifndef HALDISPLAY_H
 #define HALDISPLAY_H
 
-#include <stdint.h>
+#include "../Faxic_type.h"
 
 namespace Faxic
 {
-	typedef struct
-	{
-		uint8_t r;
-		uint8_t g;
-		uint8_t b;
-	} RGB_t;
-
 	class halDisplay {
 	protected:
 		int width;
