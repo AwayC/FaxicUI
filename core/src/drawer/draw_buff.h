@@ -52,6 +52,18 @@ public:
         }
     }
 
+    void setArea(int x1, int y1, int x2, int y2, const RGB_t &color) {
+        int y1_ = std::min(y1, y2);
+        int y2_ = std::max(y1, y2);
+        int x1_ = std::min(x1, x2);
+
+        const int wid = abs(x2 - x1);
+        for(int y = y1_; y < y2_; ++ y) {
+            auto* start = buffer.data() + y * w + x1_;
+            std::fill(start, start + wid, color);
+        }
+    }
+
 
 };
 
