@@ -18,6 +18,12 @@ namespace Faxic
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, alpha);
     }
 
+    void Simulator::setColor(uint8_t r, uint8_t g, uint8_t b)
+    {
+        this->drawColor = {r, g, b};
+        SDL_SetRenderDrawColor(renderer, r, g, b, alpha);
+    }
+
 
     void Simulator::clearCanvas(){
         SDL_RenderClear(renderer);
@@ -92,6 +98,10 @@ namespace Faxic
 
     int Simulator::getTick() {
         return SDL_GetTicks();
+    }
+
+    void Simulator::setA(uint8_t a) {
+        alpha = a;
     }
 }
 

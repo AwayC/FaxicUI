@@ -9,7 +9,6 @@
 #include <vector>
 #include "drawBase.h"
 #include "draw_buff.h"
-#include "../Faxic_profiler.h"
 
 namespace Faxic {
 

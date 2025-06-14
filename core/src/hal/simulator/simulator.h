@@ -39,6 +39,7 @@ public:
     return ;
   }
   void setColor(RGB_t color);
+  void setColor(uint8_t r, uint8_t g, uint8_t b);
   void setA(uint8_t a);
   void drawPixel(int x, int y);
   void drawRect(int x, int y, int w, int h);

@@ -39,7 +39,7 @@ void Drawer::clear() {
 	buffer.clear();
 }
 
-void Drawer::drawComponent(drawBase* component) {
+void Drawer::drawComponent(DrawBase* component) {
 	component->draw(buffer);
 }
 

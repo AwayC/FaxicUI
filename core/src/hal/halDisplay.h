@@ -29,6 +29,7 @@ namespace Faxic
 		virtual int getTick() = 0;
 		virtual void showCanvas() const = 0;
 		virtual void setColor(RGB_t color) = 0;
+		virtual void setColor(uint8_t r, uint8_t g, uint8_t b) = 0;
 		virtual void setA(uint8_t a) = 0;
 
 		int getWidth() { return width; }
