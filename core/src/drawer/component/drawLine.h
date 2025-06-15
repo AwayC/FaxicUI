@@ -12,7 +12,6 @@
 namespace Faxic {
 
 class LineStyle : public DrawStyle {
-	Point p1, p2;
 	RGB_t color;
 	uint32_t width = 1;
 	uint32_t dashWidth = 0;
@@ -25,26 +24,22 @@ public:
 		Dash
 	};
 
-	LineStyle(Point _p1, Point _p2, RGB_t _color) : p1(_p1), p2(_p2), color(_color) {};
+	LineStyle(Point _p1, Point _p2, RGB_t _color) : color(_color) {};
 	~LineStyle() {}
 	void setWidth(uint32_t _width) { width = _width; }
 	void setDash(uint32_t _dashWidth, int _dashGap) { dashWidth = _dashWidth, dashGap = _dashGap; }
 	void setStRound(bool rd) { roundStart = rd; }
 	void setEdRound(bool rd) { roundEnd = rd; }
 	void setColor(RGB_t _color) { color = _color; }
-	void setP1(Point _p1) { p1 = _p1; }
-	void setP2(Point _p2) { p2 = _p2; }
 
-	Point getP1() { return p1; }
-	Point getP2() { return p2; }
 	RGB_t getColor() { return color; }
-	int getWidth() { return width; }
+	uint32_t getWidth() { return width; }
 	bool getIsDash() {
 		bool IsDash = dashWidth && dashGap;
 		return IsDash;
 	}
-	int getDashWidth() { return dashWidth; }
-	int getDashGap() { return dashGap; }
+	uint32_t getDashWidth() { return dashWidth; }
+	uint32_t getDashGap() { return dashGap; }
 	bool getRoundStart() { return roundStart; }
 	bool getRoundEnd() { return roundEnd; }
 
@@ -54,13 +49,18 @@ public:
 };
 
 class DrawLine : public DrawBase {
-
+	Point p1, p2;
 public:
-    DrawLine(LineStyle *_style) : DrawBase(_style) {
+    DrawLine(Point _p1, Point _p2, LineStyle *_style) : p1(_p1), p2(_p2), DrawBase(_style) {
     	assert(dynamic_cast<LineStyle*>(_style) != nullptr);
     };
     ~DrawLine() {}
     void draw(Gbuffer &buf) override; // 绘制
+	void setP1(Point _p1) { p1 = _p1; }
+	void setP2(Point _p2) { p2 = _p2; }
+
+	Point getP1() { return p1; }
+	Point getP2() { return p2; }
 
 private:
     void drawHorLine(Gbuffer &buf);

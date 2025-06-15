@@ -11,8 +11,6 @@ void DrawLine::draw(Gbuffer &buf) {
 
     if(sty->getWidth() < 1) return;
 
-    Point p1 = sty->getP1();
-    Point p2 = sty->getP2();
     if(p1.x == p2.x && p1.y == p2.y) return;
 
 	if(p1.y == p2.y) drawHorLine(buf);
@@ -37,8 +35,6 @@ void DrawLine::drawHorLine(Gbuffer &buf) {
 	uint32_t w_helf1 = w_helf0 + (w & 1);
 
 	bool dashed = sty->getIsDash();
-	Point p1 = sty->getP1();
-	Point p2 = sty->getP2();
 
 	int x1 = (int)std::min(p1.x, p2.x);
 	int x2 = (int)std::max(p1.y, p2.y);
@@ -75,8 +71,6 @@ void DrawLine::drawVerLine(Gbuffer &buf) {
 	uint32_t w_helf1 = w_helf0 + (w & 1);
 
 	bool dashed = sty->getIsDash();
-	Point p1 = sty->getP1();
-	Point p2 = sty->getP2();
 
 	int x1 = (int)p1.x - w_helf1;
 	int x2 = (int)p1.x + w_helf0;
@@ -108,14 +102,7 @@ void DrawLine::drawVerLine(Gbuffer &buf) {
 void DrawLine::drawSkewLine(Gbuffer &buf) {
 	auto *sty = static_cast<LineStyle*>(style);
 
-	Point p1, p2;
-	if(sty->getP1().y < sty->getP2().y) {
-		p1 = sty->getP1();
-		p2 = sty->getP2();
-	} else {
-		p1 = sty->getP2();
-		p2 = sty->getP1();
-	}
+	if (p1.y > p2.y) std::swap(p1, p2);
 
 	int xdiff = p2.x - p1.x;
 	int ydiff = p2.y - p1.y;

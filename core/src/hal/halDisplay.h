@@ -18,7 +18,7 @@ namespace Faxic
 
 	public:
 		halDisplay(int wid, int hei) : width(wid), height(hei) {};
-		virtual ~halDisplay() {};
+		virtual ~halDisplay() = default;
 		virtual bool init() = 0;
 		virtual void deinit() = 0;
 		virtual void drawPixel(int x, int y) = 0;
@@ -36,6 +36,7 @@ namespace Faxic
 		int getHeight() { return height; }
 		RGB_t getColor() { return drawColor; }
 		uint8_t getAlpha() { return alpha; }
+
 
 	};
 }

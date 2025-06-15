@@ -13,8 +13,10 @@ namespace Faxic
     void Simulator::setColor(RGB_t color)
     {
         this->drawColor = color; // set color
+#if 0
         std::cout << "set color: " << (int)color.r << " " << (int)color.g << " " << (int)color.b << std::endl;
         std::cout << "alpha: " << (int)alpha << std::endl;
+#endif
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, alpha);
     }
 
@@ -69,6 +71,7 @@ namespace Faxic
             std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
             return false;
         }
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);  // 启用透明度混合
         setColor(RGB_WHITE);
         clearCanvas();
         showCanvas();

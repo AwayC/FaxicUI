@@ -22,7 +22,7 @@ protected:
     DrawStyle *style;
 public:
     DrawBase(DrawStyle *_style) : style(_style) {};
-    virtual ~DrawBase() {};
+    virtual ~DrawBase() = default;
     virtual void draw(Gbuffer &buf) = 0;
 
 };
