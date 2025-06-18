@@ -24,7 +24,7 @@ public:
 		Dash
 	};
 
-	LineStyle(Point _p1, Point _p2, RGB_t _color) : color(_color) {};
+	LineStyle(RGB_t _color) : color(_color) {};
 	~LineStyle() {}
 	void setWidth(uint32_t _width) { width = _width; }
 	void setDash(uint32_t _dashWidth, int _dashGap) { dashWidth = _dashWidth, dashGap = _dashGap; }
@@ -38,6 +38,7 @@ public:
 		bool IsDash = dashWidth && dashGap;
 		return IsDash;
 	}
+	LineType getType() { if (getIsDash()) return LineType::Dash; else return LineType::Solid; }
 	uint32_t getDashWidth() { return dashWidth; }
 	uint32_t getDashGap() { return dashGap; }
 	bool getRoundStart() { return roundStart; }

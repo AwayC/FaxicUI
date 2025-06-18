@@ -20,6 +20,7 @@ public:
     ~Gbuffer() {};
     void resize(int _w, int _h) {
         w = _w; h = _h;
+        buffer.resize(w * h); // 重新分配内存
     };
 
     void clear() {
@@ -52,7 +53,7 @@ public:
         int x1 = std::min(_p1.x, _p2.x);
         int x2 = std::max(_p1.x, _p2.x);
 
-        const int wid = abs(_p2.x - _p1.x);
+        const int wid = abs(_p2.x - _p1.x) + 1;
 
         auto mask = [&]()
         {
@@ -68,7 +69,7 @@ public:
 
         if (!mask()) return; // 超出边界
 
-        for(int y = y1;y < y2;++ y) {
+        for(int y = y1;y <= y2;++ y) {
             auto* start = buffer.data() + y * w + x1;
             std::fill(start, start + wid, color);
         }
@@ -82,8 +83,8 @@ public:
 
         auto mask = [&]()
         {
-            if (x2_ < 0 || x1_ > w) return false;
-            if (y2_ < 0 || y1_ > h) return false;
+            if (x2_ < 0 || x1_ >= w) return false;
+            if (y2_ < 0 || y1_ >= h) return false;
             y1_ = std::max(y1_, 0);
             y2_ = std::min(w, y2_);
             x1_ = std::max(x1_, 0);
@@ -94,8 +95,8 @@ public:
 
         if (!mask()) return; // 超出边界
 
-        const int wid = abs(x2 - x1);
-        for(int y = y1_; y < y2_; ++ y) {
+        const int wid = abs(x2 - x1) + 1;
+        for(int y = y1_; y <= y2_; ++ y) {
             auto* start = buffer.data() + y * w + x1_;
             std::fill(start, start + wid, color);
         }

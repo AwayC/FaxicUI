@@ -17,7 +17,9 @@ namespace Faxic
 		uint8_t alpha;
 
 	public:
-		halDisplay(int wid, int hei) : width(wid), height(hei) {};
+		halDisplay(int wid, int hei) : width(wid), height(hei),
+										drawColor(RGB_t(255, 255, 255)),
+										alpha(255) {};
 		virtual ~halDisplay() = default;
 		virtual bool init() = 0;
 		virtual void deinit() = 0;

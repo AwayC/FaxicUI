@@ -8,12 +8,12 @@
 namespace Faxic
 {
 
-typedef struct
+struct RGB_t
 {
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-} RGB_t;
+    uint8_t r, g, b;
+    RGB_t() = default;
+    RGB_t(uint8_t _r, uint8_t _g, uint8_t _b) : r(_r), g(_g), b(_b) {};
+};
 
 #define RGB_WHITE RGB_t({255, 255, 255})
 #define RGB_BLACK RGB_t({0, 0, 0})
@@ -29,10 +29,12 @@ typedef struct
 #define RGB_PINK RGB_t({255, 192, 203})     // 粉色
 #define RGB_NAVY RGB_t({0, 0, 139})
 
-typedef struct
+struct Point
 {
-    int x, y;
-} Point;
+    int x;
+    int y;
+    Point(int _x, int _y) : x(_x), y(_y) {};
+};
 
 using RGBA_hex_t = uint32_t;
 

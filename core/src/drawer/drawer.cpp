@@ -4,27 +4,36 @@
 
 #include "drawer.h"
 
+#include <cassert>
+
+#include "iostream"
+
 namespace Faxic {
 
 Drawer::Drawer(halDisplay* display) {
+	assert(display != nullptr);
+	this->display = display;
 	width = display->getWidth();
 	height = display->getHeight();
 	alpha = display->getAlpha();
-	setAlpha(alpha);
 	buffer.resize(width, height); // 初始化缓冲区
-	this->display = display;
+
+	std::cout << "Drawer Created" << std::endl;
 }
 
 void Drawer::setColor(RGB_t color) {
+	assert(this->display != nullptr);
     display->setColor(color);
 }
 void Drawer::setAlpha(uint8_t a) {
+	assert(this->display != nullptr);
     this->alpha = a;
     display->setA(a);
 }
 
 void Drawer::flush() {
     // flush the buffer
+	assert(this->display != nullptr);
 	for(int x = 0;x < width;x ++) {
 		for(int y = 0;y < height;y ++) {
 			display->setColor(buffer.at(x, y));

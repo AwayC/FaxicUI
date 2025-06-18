@@ -4,6 +4,8 @@
 
 #include "simulator.h"
 
+#include <cassert>
+
 #define SET_WHITE SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255)
 #define SET_BLACK SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255)
 #define SET_RED SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255)
@@ -81,6 +83,7 @@ namespace Faxic
 
     void Simulator::showCanvas() const
     {
+        assert(renderer != nullptr);
         SDL_RenderPresent(renderer);
     }
 
